@@ -1,0 +1,114 @@
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form   autocomplete="off" 
+                [formGroup]="miFormulario"
+                (ngSubmit)="formularioSubmit()">
+            <!-- Nombre -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                    <input  class="form-control"
+                            type="text"
+                            formControlName="nombre"
+                            placeholder="Nombre Del Usuario">
+                    <span   class="form-text text-danger"
+                            *ngIf="validar('nombre')">
+                        Debe De Ser En Formato De Nombre & Apellido
+                    </span>
+                </div>
+            </div>
+            <!-- Correo -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Correo Electronico</label>
+                <div class="col-sm-9">
+                    <input  class="form-control"
+                            type="email"
+                            formControlName="email"
+                            placeholder="Email del Usuario">
+
+                    <div    
+                        *ngIf="validar('email')"
+                        class="form-text text-danger">
+                        {{ errorEmailMsg }} 
+                    </div>
+
+                </div>
+            </div>
+            <!-- User Name -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Usuario</label>
+                <div class="col-sm-9">
+                    <input  type="text"
+                            class="form-control"
+                            formControlName = "userName"
+                            placeholder="Nombre Codigo Del Usuario">
+                    <span   class="form-text text-danger"
+                            *ngIf="validar('userName')">
+                        El usuario es invalido
+                    </span>
+                </div>
+            </div>
+            <!-- Password -->
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Contraseña</label>
+                <div class="col-sm-9">
+                    <input  type="password"
+                            class="form-control"
+                            formControlName="password"
+                            placeholder="Password De Su Cuenta">
+                    <div    class="form-text text-danger"
+                            *ngIf="validar('password')">
+                        La contraseña debe de terner minimo 6 caracteres
+                    </div>
+                </div>
+            </div>
+            <!-- Confirmar Password -->
+            <div class="row mb-3">
+                <label class="col-form-label col-sm-3">Contraseña</label>
+                <div class="col-sm-9">
+                    <input  type="Password" 
+                            class="form-control"
+                            formControlName="password2"
+                            placeholder="Repita Su Contraseña">
+                    <div    class="form-text text-danger"
+                            *ngIf="validar('password2')">
+                        Las contraseñas no es igual
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                            type="submit">
+                        Crear
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<h2>Valid {{miFormulario.valid}} </h2>
+
+<h2>Form Errors</h2>
+<pre> {{miFormulario.errors | json}} </pre>
+
+<h5>Nombre</h5>
+<pre>{{miFormulario.controls.nombre.errors | json}}</pre>
+<br>
+<h5>Email</h5>
+<pre>{{miFormulario.controls.email.errors | json}}</pre>
+<br>
+<h5>User Name</h5>
+<pre>{{miFormulario.controls.userName.errors | json}}</pre>
+
+
+<h5>Password</h5>
+<pre>{{miFormulario.controls.password.errors | json}}</pre>
+
+<h5>Confirmacion</h5>
+<pre>{{miFormulario.controls.password2.errors | json}}</pre>
